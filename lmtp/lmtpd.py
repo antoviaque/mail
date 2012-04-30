@@ -4,9 +4,10 @@
 
 import asyncore
 import daemon
+import uuid
+import time
 
 from pymongo import Connection
-from pymongo.binary import Binary
 
 from datetime import datetime
 from smtpd import SMTPChannel, SMTPServer
@@ -15,15 +16,26 @@ from email import message_from_string
 
 # Functions #########################################################
 
+def valid_utf8(text):
+    if text is None:
+        return None
+    return text.decode('utf-8', 'replace').encode('utf-8')
+
 def parse_parts(msg):
     if not msg.is_multipart():
+        if msg.get_content_maintype() == 'text':
+            content = valid_utf8(msg.get_payload(None, True))
+        else:
+            # TODO Save non-text attachments as static files
+            content = ''
+
         result = {
             'is_multipart': False,
-            'content_type': msg.get_content_type(),
-            'filename': msg.get_filename(),
+            'content_type': valid_utf8(msg.get_content_type()),
+            'filename': valid_utf8(msg.get_filename()),
             'parameters': msg.get_params(),
-            'charset': msg.get_charset(),
-            'content': Binary(msg.get_payload(None, True)),
+            'charset': valid_utf8(msg.get_charset()),
+            'content': content,
         }
     else:
         result = {
@@ -52,13 +64,17 @@ class LMTPServer(SMTPServer):
         msg = message_from_string(data)
 
         mail = {
+            '_id': str(uuid.uuid4()),
             'envelope_from': mailfrom,
             'envelope_to': rcpttos,
-            'received': datetime.utcnow(),
-            'length': len(data),
-            'source': data,
-            'headers': msg.items(),
+            'length': str(len(data)),
             'body': parse_parts(msg),
+            'source': valid_utf8(data),
+            'headers': msg.items(),
+            'from': valid_utf8(msg['from']),
+            'to': valid_utf8(msg['to']),
+            'subject': valid_utf8(msg['subject']),
+            'received': datetime.utcnow(),
         }
 
         self.db.mails.insert(mail)
