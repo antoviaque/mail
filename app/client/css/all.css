@@ -1,0 +1,50 @@
+
+body .navbar {
+    margin-bottom: 0px;
+}
+
+.login-menu {
+    width: 250px;
+}
+
+.login-form {
+    margin: 0 10px -12px 10px;
+}
+
+.login-form input[type=text],
+.login-form input[type=password] {
+    width: 180px;
+    margin: 2px 0;
+}
+
+.login-form button {
+    float: right;
+}
+
+.column2, .column3 {
+   -moz-box-shadow:    -5px 2px 10px 0 #ccc;
+   -webkit-box-shadow: -5px 2px 10px 0 #ccc;
+   box-shadow:         -5px 2px 10px 0 #ccc;
+   border-left: #aaa;
+   border-size: 2px;
+}
+
+.container-fluid .row-fluid > .column2,
+.container-fluid .row-fluid > .column3 {
+    margin-left: 0;
+}
+
+.conversation-overview {
+    cursor: pointer;
+    margin: 0;
+}
+
+.wall .conversation-overview.selected {
+    background-color: #EFEFEF;
+    background-image: none;
+}
+
+.message-body {
+    margin: 10px 0 10px 25px;
+}
+
