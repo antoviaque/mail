@@ -35,7 +35,7 @@ Session.set('conversation_replying', false);
 
 // Functions /////////////////////////////////////////////////////////////
 
-function cancel_reply() {
+function close_reply() {
     var html_editor = CKEDITOR.instances.html_editor;
     if(html_editor) {
         html_editor.destroy();
@@ -82,7 +82,7 @@ Template.conversation_details.activate_editor = function() {
                 ['Bold','Italic','Underline','Strike','-','TextColor','BGColor','-','RemoveFormat'],
                 ['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote'],
                 ['Find','Replace','-','SelectAll'],
-	            ['Undo','Redo'],
+                ['Undo','Redo'],
                 ['Format','Font','FontSize'],
                 ['Link','Unlink','-','Image','Table','HorizontalRule','Smiley','SpecialChar'],
                 ['Maximize'],
@@ -112,7 +112,7 @@ Template.wall.events = {
         if(!el.hasClass('conversation-overview')) {
             el = el.closest('.conversation-overview');
         }
-        cancel_reply();
+        close_reply();
         Session.set('conversation_current_id', el.attr('data'));
     },
 };
@@ -124,12 +124,21 @@ Template.conversation_details.events = {
         Session.set('conversation_replying', true);
     },
     'click .cancel-button': function(evt) {
-        cancel_reply();
+        close_reply();
     },
     'click .send-button': function(evt) {
+        var orig_mail = Template.conversation_details.conversation();
         var html_editor = CKEDITOR.instances.html_editor;
         var reply_html = html_editor.getData();
-        console.log(reply_html);
+
+        var mail = {
+            to : orig_mail.from,
+            from : 'test@maildev.plebia.org',
+            subject : 'Re: ' + orig_mail.subject,
+            html: reply_html,
+        };
+        Meteor.call('sendmail', mail);
+        close_reply();
     },
 };
 
