@@ -48,3 +48,15 @@ body .navbar {
     margin: 10px 0 10px 25px;
 }
 
+.conversation-details .reply-button {
+    float: right;
+}
+
+.conversation-details .send-button,
+.conversation-details .cancel-button {
+    float: right;
+    margin: 10px 5px;
+}
+
+
+

@@ -29,33 +29,82 @@ Meteor.subscribe('mails');
 Session.set('timezone', jstz.determine_timezone());
 
 // Current conversation
-Session.set('current_conversation_id', null);
+Session.set('conversation_current_id', null);
+Session.set('conversation_replying', false);
 
+
+// Functions /////////////////////////////////////////////////////////////
+
+function cancel_reply() {
+    var html_editor = CKEDITOR.instances.html_editor;
+    if(html_editor) {
+        html_editor.destroy();
+    }
+    Session.set('conversation_replying', false);
+}
 
 // Templates /////////////////////////////////////////////////////////////
+
+// Conversations //
 
 Template.wall.conversations = function() {
     return Mails.find({}, {sort: {received: -1}});
 };
 
+// Conversation overview //
+
 Template.conversation_overview.selected = function() {
-    if(Session.get('current_conversation_id') === this._id) {
+    if(Session.get('conversation_current_id') === this._id) {
         return 'selected';
     } else {
         return '';
     }
 };
 
+// Conversation details //
+
 Template.conversation_details.conversation = function() {
-    var mail = Mails.findOne({_id: Session.get('current_conversation_id')});
+    var mail = Mails.findOne({_id: Session.get('conversation_current_id')});
     if(mail) {
         mail.body_html = mail2html(mail);
     }
     return mail;
 };
 
+Template.conversation_details.conversation_replying = function() {
+    return Session.get('conversation_replying');
+};
+
+Template.conversation_details.activate_editor = function() {
+    Meteor.defer(function() {
+        CKEDITOR.replace('html_editor', {
+            toolbar: [ 
+                ['Bold','Italic','Underline','Strike','-','TextColor','BGColor','-','RemoveFormat'],
+                ['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote'],
+                ['Find','Replace','-','SelectAll'],
+	            ['Undo','Redo'],
+                ['Format','Font','FontSize'],
+                ['Link','Unlink','-','Image','Table','HorizontalRule','Smiley','SpecialChar'],
+                ['Maximize'],
+            ],
+        });
+    });
+};
+
+Template.conversation_details.reply_base_html = function() {
+    var mail = Template.conversation_details.conversation();
+    var reply_base_html = '<p></p>' +
+        '<p>' + mail.from + ' wrote:</p>' +
+        '<blockquote class="gmail_quote" style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">' +
+        mail.body_html +
+        '</blockquote>';
+    return reply_base_html;
+};
+
 
 // Events ////////////////////////////////////////////////////////////////
+
+// Wall //
 
 Template.wall.events = {
     'click .conversation-overview' : function (evt) {
@@ -63,8 +112,25 @@ Template.wall.events = {
         if(!el.hasClass('conversation-overview')) {
             el = el.closest('.conversation-overview');
         }
-        Session.set('current_conversation_id', el.attr('data'));
-    }
+        cancel_reply();
+        Session.set('conversation_current_id', el.attr('data'));
+    },
+};
+
+// Conversation details //
+
+Template.conversation_details.events = {
+    'click .reply-button': function(evt) {
+        Session.set('conversation_replying', true);
+    },
+    'click .cancel-button': function(evt) {
+        cancel_reply();
+    },
+    'click .send-button': function(evt) {
+        var html_editor = CKEDITOR.instances.html_editor;
+        var reply_html = html_editor.getData();
+        console.log(reply_html);
+    },
 };
 
 
@@ -72,7 +138,6 @@ Template.wall.events = {
 
 Meteor.startup(function() {
     //$('.dateinput').datepicker();
-    
 });
 
 

@@ -1,6 +1,7 @@
 <head>
     <title>Mail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -77,6 +78,7 @@
         {{#if conversation}}
         {{#with conversation}}
             <div class="container-fluid well">
+                <button class="btn reply-button">Reply</button>
                 <div class="row-fluid">
                     <div class="span2">From:</div>
                     <div class="span10">{{from}}</div>
@@ -94,6 +96,12 @@
                 {{{body_html}}}
             </div>
         {{/with}}
+        {{/if}}
+        {{#if conversation_replying}}
+            <textarea id="html_editor">{{reply_base_html}}</textarea>
+            <button class="btn btn-success send-button">Send</button>
+            <button class="btn cancel-button">Cancel</button>
+            {{activate_editor}}
         {{/if}}
     </div>
 </template>
