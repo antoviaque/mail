@@ -53,7 +53,7 @@ First, start the LMTP daemon:
 
 Now, you need to configure your SMTP server, to get him to deliver the incoming emails to Mail rather than on a local mailbox. For example with Postfix, add the following to `/etc/postfix/main.cf`:
 
-    virtual_transport = lmtp:37.59.162.222:1111
+    virtual_transport = lmtp:127.0.0.1:1111
     virtual_mailbox_domains = maildev.plebia.org
 
 This will feed emails addressed to any address like @maildev.plebia.org to Mail.

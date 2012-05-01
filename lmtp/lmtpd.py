@@ -93,7 +93,7 @@ class LMTPChannel(SMTPChannel):
 
 def start():
     with daemon.DaemonContext():
-        server = LMTPServer(('37.59.162.222', 1111), None)
+        server = LMTPServer(('127.0.0.1', 1111), None)
         asyncore.loop()
 
 if __name__ == '__main__':
