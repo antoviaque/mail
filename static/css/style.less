@@ -1,0 +1,1021 @@
+/*
+
+Theme Name: 
+Theme URI: 
+Description:
+Version:
+Author: 
+
+*/	
+
+
+/* global mixins */
+
+.clip{
+	-webkit-background-clip: padding-box; 
+	-moz-background-clip: padding; 
+	-o-background-clip: padding; 
+	background-clip: padding-box; 
+}
+
+.round(@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.box-sizing(@sizing: border-box){
+	-webkit-box-sizing: @sizing;
+	-moz-box-sizing: @sizing;
+	box-sizing: @sizing;
+}
+
+.scale(@scale: 1.5, @x: 0, @y: 0){
+	-webkit-transform: scale(@scale);
+	-webkit-transform-origin: @x @y;
+	-moz-transform: scale(@scale);
+	-moz-transform-origin: @x @y;
+	-o-transform: scale(@scale);
+	-o-transform-origin: @x @y;
+	-ms-transform: scale(@scale);
+	-ms-transform-origin: @x @y;
+	transform: scale(@scale);
+	transform-origin: @x @y;
+}
+
+.shadow(@depth: 0 2px 4px rgba(0,0,0,.3)){
+	-webkit-box-shadow: @depth;
+	-moz-box-shadow: @depth;
+	-o-box-shadow: @depth;
+	box-shadow: @depth;
+}
+
+.transform(@deg: rotate(9deg)){	
+	-webkit-transform: @deg;
+	-moz-transform: @deg;
+	-ms-transform: @deg;
+	-o-transform: @deg;
+	transform: @deg;
+}
+
+.transition(@val: all 1s ease-in-out){
+	-webkit-transition: @val;
+	-moz-transition: @val;
+	-o-transition: @val;
+	transition: @val;
+}
+
+.bgsize(@size: 100% 100%){
+	-webkit-background-size: @size; 
+	-moz-background-size: @size;
+	-o-background-size: @size;
+	background-size: @size;
+}
+
+.gradient(@start: #eee, @end: #777) {	
+	background: @start;
+	background-image: -moz-linear-gradient(top, @start, @end); 
+	background-image: -ms-linear-gradient(top, @start, @end); 
+	background-image: -o-linear-gradient(top, @start, @end);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
+	background-image: -webkit-linear-gradient(top, @start, @end);
+	background-image: linear-gradient(top, @start, @end);
+}
+
+.gradient-circle(@h: center, @v: center, @shape: circle, @size: contain, @start: #ddd, @finish: #333, @stop: 100%) {
+	background-color: @start;
+	background-image: -moz-radial-gradient(@h @v, @shape @size, @start, @end @stop);
+	background-image: -webkit-radial-gradient(@h @v, @shape @size, @start, @end @stop);
+	background-image: -o-radial-gradient(@h @v, @shape @size, @start, @end @stop);
+	background-image: -ms-radial-gradient(@h @v, @shape @size, @start, @end @stop);
+	background-image: radial-gradient(@h @v, @shape @size, @start, @end @stop);
+}
+
+.transition(@who: all, @length: .5s, @how: ease-out){
+	-webkit-transition: @who @length @how;
+	-moz-transition: @who @length @how;
+	-ms-transition: @who @length @how;
+	-o-transition: @who @length @how;
+	transition: @who @length @how;
+}
+
+.columns(@count: 2, @width: 200px, @gap: 20px){
+	-moz-column-count: @count;
+	-moz-column-gap: @gap;
+	-webkit-column-count: @count;
+	-webkit-column-gap: @gap;
+	column-count: @count;
+	column-gap: @gap;
+}
+
+
+
+/* handy shortcuts */
+.true(@height: 20px){
+	height: @height;
+	line-height: @height;
+}
+
+.indent(@indent: -9999em){
+	text-indent: @indent;
+}
+
+.size(@width: 20px, @height:20px){
+	width: @width;
+	height: @height;
+}
+
+.clear{/* for use on :after */
+	content: " "; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;	
+}
+
+
+
+/* global color variables */
+
+@link: #777;
+
+@heading: #333;
+
+@border: #ccc;
+
+
+@dark: #292E34;
+
+@red: #E91000;
+
+@light-red: #F37066;
+
+@pale-red: #FBCFCC;
+
+@blue: #348DC5;
+
+@text: #17222B;
+
+@gray: #bbb;
+
+@dark-gray: #686868;
+
+
+
+/* global layout */
+
+
+body {
+	font-size: 12px;
+	margin: 0px;
+	text-align: center;
+	background: #F8FAF9;
+	color: #333;
+	text-align: left;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+
+#mailbox{
+	background: #fff;
+}
+
+	.email-previews{		
+		position: relative;
+		height: 100%;
+		overflow-y: scroll;
+
+		li{
+			position: relative;
+		}
+	}
+	
+
+		li.email{
+			position: relative;
+			overflow: hidden;
+			border-bottom: 1px solid @gray;
+		}
+
+
+		.email-priority{
+			float: left;
+			width: 36px;
+
+			li{
+				height: 36px;
+				overflow: hidden;
+			}
+
+			a{
+				display: block;
+				height: 36px;
+				.indent;
+			}
+
+			.high{
+				background: @red;
+			}
+
+			.medium{
+				background: @light-red;
+			}
+
+			.low{
+				background: @pale-red;
+			}
+		}
+
+
+		.email-excerpt{
+			position: relative;
+			width: 100%;
+			margin-left: 36px;
+			line-height: 1.5em;
+
+			a{
+				position: relative;
+				display: block;
+				padding: 13px 13px 0;
+				height: 95px;
+				overflow: hidden;
+				color: @text;
+				text-decoration: none;
+			}
+
+			time{
+				float: right;
+				font-size: 10px;
+				color: @gray;
+				margin-right: 46px;
+				margin-top: 4px;
+			}
+
+			strong{
+				display: block;
+				font-size: 16px;
+				font-weight: bold;
+			}
+
+			em{
+				display: block;
+				padding: 8px 0;
+			}
+
+			span{
+				display: block;
+				color: @gray;
+				margin-right: 36px;
+			}
+		}
+
+
+
+
+
+	#mail-reader{
+		overflow-y: scroll;
+	}
+
+
+		.single-email{
+			position: relative;
+			background: #fff;
+		}
+
+			.single-email-header{
+				height: 34px;
+
+				.sender-image{
+					float: left;
+					height: 40px;
+					width: 40px;
+					border: 2px solid #efefef;
+					.round(22px);
+					margin-top: -22px;
+					background: #fefefe;
+				}
+
+				h3{
+					margin-left: 55px;
+					color: @dark-gray;
+				}
+
+				cite a{
+					color: @blue;
+				}
+
+				a{
+					color: @dark-gray;
+					font-weight: bold;
+				}
+			}
+
+			.single-email-content{
+				padding-left: 55px;
+			}
+
+				.single-email-content-secure{
+					position: relative;
+					overflow: hidden;
+
+					p, ul, ol, dl{
+						line-height: 1.5em;
+						padding-bottom: 1.5em;
+					}
+
+					strong{
+						font-weight: bold;
+					}
+
+					em, cite{
+						font-style: italic;
+					}
+
+					ul li{
+						list-style: inside disc;
+					}
+
+					ol li{
+						list-style: inside decimal;
+					}
+
+					a{
+						color: @blue;
+					}
+				}
+
+
+
+			#mailbox-actions{
+				font-size: 14px;
+				font-weight: bold;
+				background: @dark;
+				color: #fff;
+				padding: 8px 16px;
+				overflow: hidden;
+
+				a{
+					float: right;
+					padding: 6px 12px;
+					color: #fff;
+					background: @red;
+					font-weight: normal;
+					margin-left: 8px;
+					border-top: 1px solid @light-red;
+				}
+
+				a.do-delete{
+					float: left;
+					margin-left:0;
+				}
+			}
+
+			#reply-wrap{
+				background: #fff;
+				display: none;
+			}
+
+			#reply-fields{
+				position: relative;
+				font-size: 13px;
+
+				p{
+					.true(32px);
+					border-bottom: 1px solid #ddd;
+
+					span{
+						float: left;
+						width:50%;
+
+						label{
+							width: 20%;
+						}
+
+						input[type="text"]{
+							width: 80%;
+						}
+					}
+				}
+
+				label{
+					float: left;
+					width: 10%;
+					text-indent: 18px;
+					color: @dark-gray;
+				}
+
+				input[type="text"]{
+					float: right;
+					width: 90%;
+					border:0;
+					.true(32px);
+					padding:0;
+					background: none;
+				}
+			}
+
+			#style-options{
+				position: relative;
+				.true(32px);
+				padding: 0 18px;
+				border-bottom: 1px solid #ddd;
+
+				select{
+					margin-top: 4px;
+					height: 24px;
+					padding: 0 6px;
+				}
+
+				ul{
+					float: left;
+				}
+
+				li{
+					float: left;
+					padding-right: 10px;
+
+					select{
+						float: left;
+					}
+				}
+
+				a{
+					float: left;
+					width: 24px;
+					height: 24px;
+					margin: 4px 0 0;
+					background: #333;
+				}
+
+				p{
+					float: right;
+				}
+			}
+
+			#write-message{
+				position: relative;
+
+
+				textarea{
+					font-family: Arial, Helvetica, sans-serif;
+					display: block;
+					width: 100%;
+					height: 350px;
+					.box-sizing;
+					padding: 18px;
+					border:0;
+					font-size: 13px;
+					color: @dark-gray;
+				}
+			}
+
+			#reply-actions{
+				font-size: 14px;
+				font-weight: bold;
+				background: @dark;
+				color: #fff;
+				padding: 8px 16px;
+				overflow: hidden;
+
+				input{
+					float: right;
+					padding: 0 18px;
+					color: #fff;
+					background: @red;
+					font-weight: normal;
+					margin-left: 8px;
+					border: 0;
+					.true(28px);
+					border-top: 1px solid @light-red;
+				}
+
+				a{
+					float: left;
+					width: 28px;
+					height: 28px;
+					.indent;
+					background: #666;
+					border-top: 1px solid #777;
+				}
+			}
+
+
+
+
+@media only screen and (max-width: 900px) {
+
+#nav{
+	z-index: 100;
+	background: @dark;
+	.shadow;
+	height: 48px;
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+
+	h1{
+		display: none;
+	}
+
+	#locations{
+		float: left;
+
+		li{
+			float: left;
+			border-right: 1px solid #555;
+		}
+
+		a{
+			float: left;
+			width: 68px;
+			height: 48px;
+			.indent;
+			position: relative;
+		}
+
+		a.active, a:hover{
+			.shadow(inset 0 0 10px rgba(0,0,0,.8));
+		}
+	}
+
+	em{
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		color: @red;
+		.indent(none);
+	}
+
+	.inbox{
+		background: url(../img/inbox.png) center no-repeat;
+	}
+
+	.steps{
+		background: url(../img/next.png) center no-repeat;
+	}
+
+	.sent{
+		background: url(../img/sent.png) center no-repeat;
+	}
+
+	.drafts{
+		background: url(../img/draft.png) center no-repeat;
+	}
+
+	.trash{
+		background: url(../img/recycle.png) center no-repeat;
+	}
+
+	#labels{
+		float: right;
+
+		&:before{
+			position: absolute;
+			top:0;
+			right:0;
+			width: 48px;
+			height:48px;
+			border-left: 1px solid #555;
+			content:"";
+			background: url(../img/show-labels.png) center no-repeat;
+		}
+
+		li{
+			display: none;
+		}
+	}
+}
+
+
+#reply-wrap{
+	position: relative;
+	border-top: 1px solid #fff;
+
+	#reply-fields{
+		label{
+			width: 15%;
+		}
+
+		input[type="text"]{
+			width: 85%;
+		}
+
+		span{
+			label{
+				width: 30%;
+			}
+
+			input[type="text"]{
+				width: 70%;
+			}
+
+		}
+	}
+
+	#style-options{
+		height: auto;
+
+		ul, p{
+			clear: both;
+			float: none;
+		}
+
+		p{
+			padding-top: 8px;
+
+		}
+	}
+}
+
+
+}/* Mobile and Tablet Base */
+
+
+
+
+
+
+
+@media only screen and (max-width: 740px) {
+
+body{
+	background: #fff;
+}
+
+#global{
+	position: relative;
+	margin: auto;
+	padding-top: 48px;
+}
+
+.email-previews{	
+	overflow: auto;
+}
+
+#mail-reader{
+	position: relative;
+	overflow: auto;
+}
+
+	.email-thread{
+		position: relative;
+
+		h2{
+			font-size: 16px;
+			font-weight: bold;
+			background: @dark;
+			color: #fff;
+			padding: 16px;
+		}
+	}
+
+	.full-thread{
+		position: relative;
+		padding: 16px;
+	}
+
+	.single-email{
+		padding: 16px;
+		margin-bottom: 18px;
+		.shadow(0 0 8px rgba(0,0,0,.2));
+	}
+
+
+}/* end Handheld media query */
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 741px){
+
+	#global{
+		overflow: hidden;
+		position: absolute;
+		top:48px;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+
+	#mailbox{
+		position: absolute;
+		width: 260px;
+		bottom:0;
+		left:0;
+		top:0;
+		.shadow;
+		z-index: 50;
+	}
+
+
+	#mail-reader{
+		position: absolute;
+		left: 260px;
+		bottom: 0;
+		right:0;
+		top:0;
+	}
+
+	.email-thread{
+		h2{
+			position: relative;
+			padding:18px 0 0 74px;
+			font-size: 24px;
+			.true(1.5em);
+			overflow: hidden;
+		}
+	}
+
+	.single-email{
+		position: relative;
+		padding: 10px 16px;
+		margin: 0 16px 20px;
+		.shadow(0 0 10px rgba(0,0,0,.2));
+
+		.single-email-header{			
+			height: auto;
+
+			h3{
+				margin-left:0;
+			}
+		}
+
+		article, .single-email-header span{
+			display: none;
+		}
+	}
+
+	li.single-email:first-of-type,
+	li.single-email.active:first-of-type{
+		position: relative;
+		.shadow(none);
+		margin:0;
+		padding: 0 0 10px 0;
+		border-bottom: 1px solid #ddd;
+		background: #fff;
+		margin-bottom: 38px;
+
+
+		.single-email-header{
+			position: relative;
+			display: block;
+			padding-bottom: 16px;
+			padding-left: 74px;
+			margin-bottom: 22px;
+			border-bottom: 1px solid #ddd;
+
+			span{
+				display: block;
+				margin-top: -34px;
+				margin-left: -58px;
+			}
+		}
+
+
+		article.single-email-content{
+			display: block;
+			padding-left: 74px;
+			padding-right: 32px;
+		}
+
+	}
+
+	.single-email.active{
+		position: relative;
+
+		.single-email-header{
+			position: relative;
+			display: block;
+			padding-bottom: 22px;
+
+			h3{
+				margin-left: 42px;
+			}
+
+			span{
+				display: block;
+				margin-left: -6px;
+			}
+		}
+
+		article.single-email-content{
+			display: block;
+			padding-left: 42px;
+		}
+	}
+
+
+}/* end Tablet & Desktop media query */
+
+
+
+
+
+@media only screen and (min-width: 901px){
+
+	#global{
+		top:0px;
+		max-width: 1300px;
+		margin: auto;
+	}
+
+	#mailbox{
+		left:148px;
+	}
+
+
+	#mail-reader{
+		position: absolute;
+		left: 408px;
+		bottom: 0;
+		right:0;
+		top:0;
+		overflow-y: scroll;
+	}
+
+	#nav{		
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		top: 0;
+		width: 148px;
+		background: @dark;
+	}
+
+
+	#locations{
+		position: relative;
+		padding: 20px 16px 36px;
+		text-align: left;
+
+		li{
+			padding: 7px 0;
+			line-height: 1.4em;
+		}
+
+		a{
+			color: @dark-gray;
+			font-size: 13px;
+			font-weight: bold;
+			display: block;
+
+			em{
+				float: right;
+				font-weight: normal;
+				color: @red;
+				font-size: 10px;
+			}
+
+			&:hover strong, &.active strong{
+				text-decoration: underline;
+				color: #fff;
+			}
+		}
+	}
+
+
+	#labels{
+		position: relative;
+		padding: 0 20px;
+		text-align: left;
+		font-size: 11px;
+
+		&:before{
+			position: absolute;
+			content:"";
+			top: -14px;
+			left:20px;
+			width: 30px;
+			height: 1px;
+			border-top: 1px solid @dark-gray;
+		}
+
+		li{
+			padding: 2px 0;
+		}
+
+		a{
+			color: @dark-gray;
+			display: block;
+			padding-left: 18px;
+			position: relative;
+			line-height: 1.4em;
+		}
+
+		a:before{
+			position: absolute;
+			top: 2px;
+			left:0;
+			height: 10px;
+			width: 10px;
+			content:"";
+			opacity: .3;
+		}
+
+		.blue a:before{
+			background: blue;
+		}
+
+		.red a:before{
+			background: red;
+		}
+
+		.yellow a:before{
+			background: yellow;
+		}
+
+		.green a:before{
+			background: green;
+		}
+	}
+
+
+	.email-previews{
+		position: relative;
+		height: 100%;
+		overflow-y: scroll;
+	}
+
+	.email-priority{
+		position: relative;
+		z-index: 75;
+		margin-left: -36px;
+		.transition(all .2s ease);
+	}
+
+	.email-excerpt{
+		margin-left: 0;
+
+		span{
+			margin-right:0;
+		}
+
+		time{
+			margin-right:0;
+		}
+	}
+
+	li.email:hover{
+		.email-priority{
+			margin-left:0;
+			.transition(all .2s ease);
+		}
+
+		.email-excerpt{
+		}
+	}
+
+
+	.no-touch{
+		#reply-wrap{
+			position: fixed;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			z-index: 500;
+			background: #000;
+			background: rgba(0,0,0,.2);
+		}
+
+			#make-reply{
+				z-index: 500;
+				position: relative;
+				max-width: 800px;
+				margin: 100px auto;
+				background: #fff;
+				.shadow(0 0 25px rgba(0,0,0,.8));
+			}
+	}
+
+		
+
+}/* end Desktop media query */
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
