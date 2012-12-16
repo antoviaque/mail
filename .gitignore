@@ -1,3 +1,5 @@
 meteor
+local_settings.sh
 *~
 *.swp
+*.py

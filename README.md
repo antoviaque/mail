@@ -16,27 +16,33 @@ See also the _Incoming emails_ section below, to feed incoming emails into Mail.
 Installation
 ------------
 
-Install the dependencies first - for example, for a Debian-based system:
+1. Dependencies
+
+Install the following packages (Debian-based systems):
 
     $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server
 
 Install npm:
 
-    $ curl http://npmjs.org/install.sh | sh
+    $ curl http://npmjs.org/install.sh | sudo sh
 
-You will need to get the source of Meteor, rather than the official package, and add the nodemailer to the node modules:
+2. Installation
 
-    $ git clone https://github.com/meteor/meteor.git
-    $ cd meteor
-    $ ./install.sh
-    $ cd dev_bundle/lib
-    $ npm install nodemailer
-
-Then clone the source repository of Mail and start it:
+Clone the source repository:
 
     $ git clone git@github.com:antoviaque/mail.git
-    $ cd mail/app
-    $ MONGO_URL=mongodb://localhost/mail ../../meteor/meteor run -p 4000 --production
+    $ cd mail
+
+(Optional) Edit the configuration if you want to change the default mongodb database/collection used:
+
+    $ cp local_settings.sh.example
+    $ gvim local_settings.sh
+
+Run the server:
+
+    $ make run
+
+It will also get meteor and its dependencies.
 
 Mail should now be accessible, by pointing your browser at http://localhost:4000/
 
@@ -48,8 +54,7 @@ Mail receives incoming emails from the SMTP server through the LMTP protocol, a 
 First, start the LMTP daemon:
 
     $ cd /path/to/mail/
-    $ cd lmtp
-    $ ./lmtpd.py
+    $ make run-lmtp
 
 Now, you need to configure your SMTP server, to get him to deliver the incoming emails to Mail rather than on a local mailbox. For example with Postfix, add the following to `/etc/postfix/main.cf`:
 
@@ -60,10 +65,14 @@ This will feed emails addressed to any address like @maildev.plebia.org to Mail.
 
 Also, make sure the domain name(s) you use for `virtual_mailbox_domains` aren't in `mydestination = ` in `main.cf`.
 
-Troubleshooting
----------------
+Development mode
+----------------
 
-If you use Mail in development mode, and it refuses to start with the following message `throw errnoException(errno, 'watch');`, you need to increase the number of allowed instances from inotify (Linux):
+If you would like to start the Meteor server in development mode:
+
+    $ make dev
+
+If it refuses to start with the following message `throw errnoException(errno, 'watch');`, you need to increase the number of allowed instances from inotify (Linux):
 
     # echo 8192 > /proc/sys/fs/inotify/max_user_instances
 
