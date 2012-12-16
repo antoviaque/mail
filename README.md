@@ -35,7 +35,7 @@ Clone the source repository:
 
 (Optional) Edit the configuration if you want to change the default mongodb database/collection used:
 
-    $ cp local_settings.sh.example
+    $ cp local_settings.sh.example local_settings.sh
     $ gvim local_settings.sh
 
 Run the server:
