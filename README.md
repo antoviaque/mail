@@ -100,7 +100,7 @@ along with this program in a file in the toplevel directory called
 
 ### Design
 
-Copyright (C) 2012 Tobias van Schneider
+Copyright (C) 2012 Tobias van Schneider http://www.vanschneider.com/work/mail/
 
 Creative Commons Attribution-ShareAlike 3.0 Unported License
 
