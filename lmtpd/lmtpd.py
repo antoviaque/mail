@@ -84,7 +84,7 @@ def parse_parts(msg):
 
 class LMTPServer(SMTPServer):
     def __init__(self, settings):
-        localaddr = (settings['lmtpd_host'], settings['lmtp_port'])
+        localaddr = (settings['lmtpd_host'], settings['lmtpd_port'])
         SMTPServer.__init__(self, localaddr, None)
 
         self.db_connect(settings)
