@@ -1,122 +1,483 @@
 <head>
-    <title>Mail</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Plebia - Mail</title>
+
+  <link rel="stylesheet" href="css/dist/reset.css" media="screen" />
+  <link rel="stylesheet" href="css/style.css" media="screen" />
+
+  <!-- give life to HTML5 objects in IE -->
+  <!--[if lte IE 8]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <!-- js HTML class -->
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="#">Mail</a>
-                <div class="nav-collapse">
-                    <ul class="nav pull-right">
-                        <form class="navbar-search" action="">
-                            <input type="text" class="search-query span2" placeholder="Search">
-                        </form>
-                        <li class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Preferences<b class="caret"></b></a>
-                            <ul class="dropdown-menu login-menu">
-                                <li class="nav-header">Registration</li>
-                                <li><a href="#">Create account</a></li>
-                                <li><a href="#">Recover password</a></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Login</li>
-                                <li class="login-form">{{> login }}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- /.nav-collapse -->
-            </div>
-        </div><!-- /navbar-inner -->
-    </div><!-- /navbar -->
+  <!-- begin markup -->
 
-    <div class="container-fluid main">
-        <div class="row-fluid">
-            <div class="span1 column1">
-                {{> labels}}
-            </div>
-            <div class="span5 column2">
-                {{> wall}}
-            </div>
-            <div class="span6 column3">
-                {{> conversation_details}}
-            </div>
+
+
+  <div id="global">
+
+    <nav id="nav">
+    <h1>servicename.com</h1>
+
+    <ul id="locations">
+      <li><a href="#" class="inbox active"><strong>Inbox</strong> <em>23</em></a></li>
+      <li><a href="#" class="steps"><strong>Next Steps</strong> <em>12</em></a></li>
+      <li><a href="#" class="sent"><strong>Sent</strong></a></li>
+      <li><a href="#" class="drafts"><strong>Drafts</strong></a></li>
+      <li><a href="#" class="trash"><strong>Trash</strong></a></li>
+    </ul>
+
+    <ul id="labels">
+      <li class="label-type-{name} blue"><a href="#">label name</a></li>
+      <li class="label-type-{name} red"><a href="#">label name</a></li>
+      <li class="label-type-{name} yellow"><a href="#">label name</a></li>
+      <li class="label-type-{name}green"><a href="#">label name</a></li>
+    </ul>
+    </nav><!-- e: nav -->
+
+
+
+    <section id="mailbox" class="inbox">
+
+    <ul class="email-previews">
+
+      <li class="email" id="985517-sender-name" data-priority="high">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+
+      <!-- on mobile, priority selection is -always visible because there is no hover for it to reveal on -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985516-sender-name" data-priority="medium">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985515-sender-name" data-priority="low">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985517-sender-name" data-priority="high">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+
+      <!-- on mobile, priority selection is -always visible because there is no hover for it to reveal on -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985516-sender-name" data-priority="medium">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985515-sender-name" data-priority="low">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985514-sender-name" data-priority="high">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985513-sender-name" data-priority="medium">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+      <li class="email" id="985512-sender-name" data-priority="low">
+      <!-- unique id creates pattern for external reference & recal, data attr for priority -->
+      <ul class="email-priority">
+        <li><a href="#" class="high">High Priority</a></li>
+        <li><a href="#" class="medium">Medium Priority</a></li>
+        <li><a href="#" class="low">Low Priority</a></li>
+      </ul>
+
+      <div class="email-excerpt">
+        <a href="#">
+          <time datetime="2012-08-07T20:45Z">8:45</time>
+          <strong>Sender Name</strong>
+          <em>Incoming email subject</em>
+          <span>Incoming email truncated content is formatting free, or should be.</span>
+        </a>
+      </div>
+      </li>
+
+    </ul>
+
+    </section><!-- e: mailbox -->
+
+
+
+    <section id="mail-reader">
+
+
+    <div class="email-thread">
+      <h2>Current email thread subject line</h2>
+
+      <ul class="full-thread" id="985512-sender-name" data-priority="low">
+
+        <li class="single-email">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p><cite>Jurgen Genser <br />iloveuniform</cite></p>
+          <!-- e: faux email content -->
+
         </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+
+        <li class="single-email active">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!-- e: faux email content -->
+
+        </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+
+        <li class="single-email">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!-- e: faux email content -->
+
+        </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+
+        <li class="single-email">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!-- e: faux email content -->
+
+        </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+
+        <li class="single-email">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!-- e: faux email content -->
+
+        </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+
+        <li class="single-email">
+        <header class="single-email-header">
+        <span class="sender-image" data-avatar="img/avatar.jpg">
+          <!-- using data to store the avatar so we can round it in css -->
+        </span>
+        <h3><cite><a href="#">Jurgen Genser</a></cite> to <em> tobias@vanschneider.com</em> <a href="#">and three others</a></h3>
+        </header>
+
+        <article class="single-email-content">
+        <div class="single-email-content-secure">
+
+          <!-- faux email content -->
+          <p>Hi Tobias!</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!-- e: faux email content -->
+
+        </div>
+        </article><!-- liberal use of <article>? Perhaps. Extra div for external malformed html email -->
+
+        </li><!-- e: single email in thread -->
+
+      </ul>
+
+    </div><!-- e: email thread -->
+
+
+    <div id="mailbox-actions">
+      <a href="#reply-wrap" class="do-reply">Reply</a>
+      <a href="#reply-wrap" class="do-reply-all">Reply All</a>
+      <a href="#" class="do-forward">Forward</a>	
+      <a href="#" class="do-delete">Delete</a>		
     </div>
+
+    <section id="reply-wrap">
+    <form action="" method="post" id="make-reply">
+      <div id="reply-actions">
+        <input type="submit" value="Send" />
+        <input type="submit" value="Save" />
+        <a href="#">Edit</a>
+      </div>
+
+      <div id="reply-fields">
+        <p>
+        <label>To:</label>
+        <input type="text" />
+        </p>
+        <p>
+        <span>
+          <label>Cc:</label>
+          <input type="text" />
+        </span>
+        <span>
+          <label>Bcc:</label>
+          <input type="text" />
+        </span>
+        </p>
+        <p>
+        <label>Subject:</label>
+        <input type="text" />
+        </p>
+      </div>
+
+      <div id="style-options">
+        <ul>
+          <li><select><option>Helvetica</option></select></li>
+          <li><a href="#" class="style-type-1"></a></li>
+          <li><a href="#" class="style-type-2"></a></li>
+          <li><a href="#" class="style-type-3"></a></li>
+          <li><a href="#" class="style-type-4"></a></li>
+          <li><a href="#" class="style-type-5"></a></li>
+          <li><a href="#" class="style-type-6"></a></li>
+          <li><a href="#" class="style-type-7"></a></li>
+        </ul>
+
+        <p>
+        <label>Confirm Reciept:</label>
+        <select><option>Off</option></select>
+        </p>
+      </div>
+
+
+      <div id="write-message">
+        <textarea rows="25" cols="60">
+          Hi Tobias,
+
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+          Kindest Regards,
+
+          Someone Name
+        </textarea>
+      </div>
+
+    </form>
+    </section><!-- e: reply wrap -->
+
+
+    </section><!-- e: mail reader -->
+
+
+
+
+
+
+
+  </div><!-- e: global -->
+
+
+  <!-- site JS -->
+  <script src="js/dist/jquery-1.6.4.min.js"></script>
+  <script src="js/dist/plugins.js"></script>
+  <script src="js/script.js"></script>
+
+  <!-- for development only -->
+  <script src="js/dist/less.dev.js"></script>
+
 </body>
-
-<template name="labels">
-    <ul class="labels breadcrumb">
-        <li>Inbox</li>
-    </ul>
-</template>
-
-<template name="wall">
-    <div class="wall">
-        {{#each conversations}}
-            {{> conversation_overview}}
-        {{/each}}
-    </div>
-</template>
-
-<template name="conversation_overview">
-    <ul class="conversation-overview breadcrumb {{selected}}" data="{{_id}}">
-        <li class="author">{{from}} <span class="divider">|</li>
-            <li class="title">{{subject}}</li>
-    </ul>
-</template>
-
-<template name="conversation_details">
-    <div class="conversation-details">
-        {{#if conversation}}
-        {{#with conversation}}
-            <div class="container-fluid well">
-                <button class="btn reply-button">Reply</button>
-                <div class="row-fluid">
-                    <div class="span2">From:</div>
-                    <div class="span10">{{from}}</div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">To:</div>
-                    <div class="span10">{{to}}</div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span2">Subject:</div>
-                    <div class="span10">{{subject}}</div>
-                </div>
-            </div>
-            <div class="message-body">
-                {{{body_html}}}
-            </div>
-        {{/with}}
-        {{/if}}
-        {{#if conversation_replying}}
-            <textarea id="html_editor">{{reply_base_html}}</textarea>
-            <button class="btn btn-success send-button">Send</button>
-            <button class="btn cancel-button">Cancel</button>
-            {{activate_editor}}
-        {{/if}}
-    </div>
-</template>
-
-<template name="login">
-    <div class="login">
-        <form class="well form-inline">
-            <input type="text" class="input-small" placeholder="Email">
-            <input type="password" class="input-small" placeholder="Password">
-            <label class="checkbox">
-                <input type="checkbox"> Remember me
-            </label>
-            <button type="submit" class="btn">Sign in</button>
-        </form>
-    </div>
-</template>
-
-

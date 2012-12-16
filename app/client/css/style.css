@@ -352,19 +352,19 @@ li.email {
     text-indent: none;
   }
   #nav .inbox {
-    background: url(../img/inbox.png) center no-repeat;
+    background: url(../../img/inbox.png) center no-repeat;
   }
   #nav .steps {
-    background: url(../img/next.png) center no-repeat;
+    background: url(../../img/next.png) center no-repeat;
   }
   #nav .sent {
-    background: url(../img/sent.png) center no-repeat;
+    background: url(../../img/sent.png) center no-repeat;
   }
   #nav .drafts {
-    background: url(../img/draft.png) center no-repeat;
+    background: url(../../img/draft.png) center no-repeat;
   }
   #nav .trash {
-    background: url(../img/recycle.png) center no-repeat;
+    background: url(../../img/recycle.png) center no-repeat;
   }
   #nav #labels {
     float: right;
@@ -377,7 +377,7 @@ li.email {
     height: 48px;
     border-left: 1px solid #555;
     content: "";
-    background: url(../img/show-labels.png) center no-repeat;
+    background: url(../../img/show-labels.png) center no-repeat;
   }
   #nav #labels li {
     display: none;
