@@ -20,7 +20,17 @@ Installation
 
 Install the following packages (Debian-based systems):
 
-    $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server
+    $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server curl
+
+[Install node.js][]:
+
+    $ sudo apt-get install python g++ make
+    $ mkdir ~/nodejs && cd $_
+    $ wget -N http://nodejs.org/dist/node-latest.tar.gz
+    $ tar xzvf node-latest.tar.gz && cd `ls -rd node-v*`
+    $ ./configure
+    $ make
+    $ sudo make install
 
 Install npm:
 
@@ -30,13 +40,19 @@ Install npm:
 
 Clone the source repository:
 
-    $ git clone git@github.com:antoviaque/mail.git
+    $ git clone git://github.com/antoviaque/mail.git
     $ cd mail
 
-(Optional) Edit the configuration if you want to change the default mongodb database/collection used:
+### Configuration (optional)
+
+Edit the configuration if you want to change one of the default values:
 
     $ cp local_settings.sh.example local_settings.sh
     $ gvim local_settings.sh
+
+See `local_settings.sh.example` to get a list of the available configuration variables are available, with their default values.
+
+### Running
 
 Run the server:
 
@@ -44,7 +60,7 @@ Run the server:
 
 It will also get meteor and its dependencies.
 
-Mail should now be accessible, by pointing your browser at http://localhost:4000/
+Mail should now be accessible, by pointing your browser to http://localhost:4000/
 
 Incoming emails
 ---------------
@@ -54,16 +70,39 @@ Mail receives incoming emails from the SMTP server through the LMTP protocol, a 
 First, start the LMTP daemon:
 
     $ cd /path/to/mail/
-    $ make run-lmtp
+    $ make run-lmtpd
 
-Now, you need to configure your SMTP server, to get him to deliver the incoming emails to Mail rather than on a local mailbox. For example with Postfix, add the following to `/etc/postfix/main.cf`:
+Now, you need to configure your SMTP server, to get him to deliver the incoming emails to Mail rather than on a local mailbox. The examples below are for Postfix, but you should be able to use any mailer able to forward to an LMTP server.
+
+### Example: Postfix (with `virtual_transport`)
+
+For example with Postfix, add the following to `/etc/postfix/main.cf`:
 
     virtual_transport = lmtp:127.0.0.1:1111
     virtual_mailbox_domains = maildev.plebia.org
 
-This will feed emails addressed to any address like @maildev.plebia.org to Mail.
+Then reload postfix:
+
+    $ sudo service postfix reload
+
+This will feed emails addressed to any address like @maildev.plebia.org to Mail, by feeding them through the LMTPD server, running on `127.0.0.1` on port `1111`.
 
 Also, make sure the domain name(s) you use for `virtual_mailbox_domains` aren't in `mydestination = ` in `main.cf`.
+
+### Example: Postfix (with `transport_maps`)
+
+Using `virtual_transport` is the easiest option, but sometimes you want to be able to define different transports for different domains. In that case, you can add the following to `main.cf`:
+
+    transport_maps = hash:/etc/postfix/transport
+
+Then add the following line to `/etc/postfix/transport`:
+
+    maildev.plebia.org    lmtp:127.0.0.1:1111
+
+Then compile the `transport` file and reload postfix:
+
+    $ postmap /etc/postfix/transport
+    $ sudo service postfix reload
 
 Development mode
 ----------------
@@ -108,4 +147,4 @@ See `LICENSE.CC-BY-SA-3.0`
 
 
 [Debian Postfix HOWTO]:     http://wiki.debian.org/Postfix
-
+[Install node.js]:          https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
