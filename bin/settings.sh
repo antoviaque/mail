@@ -24,4 +24,4 @@ touch "$BASE_DIR/local_settings.sh"
 . "$BASE_DIR/local_settings.sh"
 
 # Exports
-export MONGO_URL
+export MONGO_URL LMTPD_HOST LMTPD_PORT
