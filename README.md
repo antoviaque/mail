@@ -16,7 +16,7 @@ See also the _Incoming emails_ section below, to feed incoming emails into Mail.
 Installation
 ------------
 
-1. Dependencies
+### Dependencies
 
 Install the following packages (Debian-based systems):
 
@@ -26,7 +26,7 @@ Install npm:
 
     $ curl http://npmjs.org/install.sh | sudo sh
 
-2. Installation
+### Installation
 
 Clone the source repository:
 
@@ -76,8 +76,10 @@ If it refuses to start with the following message `throw errnoException(errno, '
 
     # echo 8192 > /proc/sys/fs/inotify/max_user_instances
 
-License
--------
+Licenses
+--------
+
+### Code
 
 Copyright (C) 2012 Xavier Antoviaque <xavier@antoviaque.org>
 
@@ -95,6 +97,14 @@ General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program in a file in the toplevel directory called
 "AGPLv3".  If not, see <http://www.gnu.org/licenses/>.
+
+### Design
+
+Copyright (C) 2012 Tobias van Schneider
+
+Creative Commons Attribution-ShareAlike 3.0 Unported License
+
+See `LICENSE.CC-BY-SA-3.0`
 
 
 [Debian Postfix HOWTO]:     http://wiki.debian.org/Postfix
