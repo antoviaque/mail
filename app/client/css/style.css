@@ -564,7 +564,6 @@ li.email {
 @media only screen and (min-width: 901px) {
   #global {
     top: 0px;
-    max-width: 1300px;
     margin: auto;
   }
   #mailbox {
