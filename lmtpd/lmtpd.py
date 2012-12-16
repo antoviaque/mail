@@ -84,10 +84,10 @@ class LMTPServer(SMTPServer):
     def db_connect(self):
         settings = get_settings()
 
-        self.mongo = Connection('{0}:{1}'.format(settings.db_host, settings.db_port))
-        self.db = self.mongo[settings.db_name]
-        if settings.db_user and settings.db_password:
-            self.db.authenticate(settings.db_user, settings.db_password)
+        self.mongo = Connection('{0}:{1}'.format(settings['db_host'], settings['db_port']))
+        self.db = self.mongo[settings['db_name']]
+        if settings['db_user'] and settings['db_password']:
+            self.db.authenticate(settings['db_user'], settings['db_password'])
 
     def process_message(self, peer, mailfrom, rcpttos, data):
         msg = message_from_string(data)
