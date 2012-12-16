@@ -29,18 +29,18 @@
       <h1>Plebia</h1>
 
       <ul id="locations">
-        <li><a href="#" class="inbox active"><strong>Inbox</strong> <em>23</em></a></li>
-        <li><a href="#" class="steps"><strong>Next Steps</strong> <em>12</em></a></li>
-        <li><a href="#" class="sent"><strong>Sent</strong></a></li>
-        <li><a href="#" class="drafts"><strong>Drafts</strong></a></li>
-        <li><a href="#" class="trash"><strong>Trash</strong></a></li>
+        <li><a href="//:0" class="inbox active"><strong>Inbox</strong> <em>23</em></a></li>
+        <li><a href="//:0" class="steps"><strong>Next Steps</strong> <em>12</em></a></li>
+        <li><a href="//:0" class="sent"><strong>Sent</strong></a></li>
+        <li><a href="//:0" class="drafts"><strong>Drafts</strong></a></li>
+        <li><a href="//:0" class="trash"><strong>Trash</strong></a></li>
       </ul>
 
       <ul id="labels">
-        <li class="label-type-{name} blue"><a href="#">label name</a></li>
-        <li class="label-type-{name} red"><a href="#">label name</a></li>
-        <li class="label-type-{name} yellow"><a href="#">label name</a></li>
-        <li class="label-type-{name}green"><a href="#">label name</a></li>
+        <li class="label-type-{name} blue"><a href="//:0">label name</a></li>
+        <li class="label-type-{name} red"><a href="//:0">label name</a></li>
+        <li class="label-type-{name} yellow"><a href="//:0">label name</a></li>
+        <li class="label-type-{name}green"><a href="//:0">label name</a></li>
       </ul>
     </nav>
 
@@ -55,20 +55,12 @@
         {{> conversation_details}}
       </div>
 
-      <div id="mailbox-actions">
-        <a href="#reply-wrap" class="do-reply">Reply</a>
-        <a href="#reply-wrap" class="do-reply-all">Reply All</a>
-        <a href="#" class="do-forward">Forward</a>	
-        <a href="#" class="do-delete">Delete</a>		
-      </div>
-
       <section id="reply-wrap">
         {{> composer }}
       </section>
     </section>
 
   </div>
-
 </body>
 
 
@@ -83,16 +75,16 @@
 <template name="conversation_overview">
   <li class="email" id="985517-sender-name" data-priority="high">
     <ul class="email-priority">
-      <li><a href="#" class="high">High Priority</a></li>
-      <li><a href="#" class="medium">Medium Priority</a></li>
-      <li><a href="#" class="low">Low Priority</a></li>
+      <li><a href="//:0" class="high">High Priority</a></li>
+      <li><a href="//:0" class="medium">Medium Priority</a></li>
+      <li><a href="//:0" class="low">Low Priority</a></li>
     </ul>
 
     <div class="email-excerpt {{selected}}" data="{{_id}}">
-      <a href="#">
+      <a href="//:0">
         <time datetime="2012-08-07T20:45Z">8:45</time>
-        <strong>{{from}}</strong>
-        <em>{{subject}}</em>
+        <strong>{{ subject }}</strong>
+        <em>{{ from }}</em>
         <span>Incoming email truncated content is formatting free, or should be.</span>
       </a>
     </div>
@@ -115,7 +107,14 @@
       {{> single-email }}
       {{> single-email }}
     </ul>
-    
+
+    <div id="mailbox-actions">
+      <a href="//:0" class="do-reply">Reply</a>
+      <a href="//:0" class="do-reply-all">Reply All</a>
+      <a href="//:0" class="do-forward">Forward</a>	
+      <a href="//:0" class="do-delete">Delete</a>		
+    </div>
+
     {{#if conversation_replying}}
       <textarea id="html_editor">{{reply_base_html}}</textarea>
       <button class="btn btn-success send-button">Send</button>
@@ -132,8 +131,8 @@
     <header class="single-email-header">
       <span class="sender-image" data-avatar="img/avatar.jpg"></span>
       <h3>
-        <cite><a href="#">{{ from }}</a></cite> 
-        to <em> {{ to }}</em> <a href="#">and three others</a>
+        <cite><a href="//:0">{{ from }}</a></cite> 
+        to <em> {{ to }}</em> <a href="//:0">and three others</a>
       </h3>
     </header>
 
@@ -150,7 +149,7 @@
     <div id="reply-actions">
       <input type="submit" value="Send" />
       <input type="submit" value="Save" />
-      <a href="#">Edit</a>
+      <a href="//:0">Edit</a>
     </div>
 
     <div id="reply-fields">
@@ -177,13 +176,13 @@
     <div id="style-options">
       <ul>
         <li><select><option>Helvetica</option></select></li>
-        <li><a href="#" class="style-type-1"></a></li>
-        <li><a href="#" class="style-type-2"></a></li>
-        <li><a href="#" class="style-type-3"></a></li>
-        <li><a href="#" class="style-type-4"></a></li>
-        <li><a href="#" class="style-type-5"></a></li>
-        <li><a href="#" class="style-type-6"></a></li>
-        <li><a href="#" class="style-type-7"></a></li>
+        <li><a href="//:0" class="style-type-1"></a></li>
+        <li><a href="//:0" class="style-type-2"></a></li>
+        <li><a href="//:0" class="style-type-3"></a></li>
+        <li><a href="//:0" class="style-type-4"></a></li>
+        <li><a href="//:0" class="style-type-5"></a></li>
+        <li><a href="//:0" class="style-type-6"></a></li>
+        <li><a href="//:0" class="style-type-7"></a></li>
       </ul>
 
       <p>

@@ -114,17 +114,21 @@ Template.wall.events = {
         }
         close_reply();
         Session.set('conversation_current_id', el.attr('data'));
+
+        return false;
     },
 };
 
 // Conversation details //
 
 Template.conversation_details.events = {
-    'click .reply-button': function(evt) {
+    'click .do-reply': function(evt) {
         Session.set('conversation_replying', true);
+        return false;
     },
     'click .cancel-button': function(evt) {
         close_reply();
+        return false;
     },
     'click .send-button': function(evt) {
         var orig_mail = Template.conversation_details.conversation();
@@ -139,6 +143,8 @@ Template.conversation_details.events = {
         };
         Meteor.call('sendmail', mail);
         close_reply();
+        
+        return false;
     },
 };
 
