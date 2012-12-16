@@ -43,6 +43,7 @@ function close_reply() {
     Session.set('conversation_replying', false);
 }
 
+
 // Templates /////////////////////////////////////////////////////////////
 
 // Conversations //
@@ -56,9 +57,8 @@ Template.wall.conversations = function() {
 Template.conversation_overview.selected = function() {
     if(Session.get('conversation_current_id') === this._id) {
         return 'selected';
-    } else {
-        return '';
     }
+    return '';
 };
 
 // Conversation details //
@@ -107,10 +107,10 @@ Template.conversation_details.reply_base_html = function() {
 // Wall //
 
 Template.wall.events = {
-    'click .conversation-overview' : function (evt) {
+    'click .email-excerpt' : function (evt) {
         var el = $(evt.target);
-        if(!el.hasClass('conversation-overview')) {
-            el = el.closest('.conversation-overview');
+        if(!el.hasClass('email-excerpt')) {
+            el = el.closest('.email-excerpt');
         }
         close_reply();
         Session.set('conversation_current_id', el.attr('data'));
