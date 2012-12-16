@@ -24,7 +24,7 @@ def get_settings():
 
     settings.update({
         'lmtpd_host': os.environ['LMTPD_HOST'],
-        'lmtpd_port': os.environ['LMTPD_PORT'],
+        'lmtpd_port': int(os.environ['LMTPD_PORT']),
     })
     
     ## DB URL ##
