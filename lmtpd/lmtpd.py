@@ -20,9 +20,16 @@ from email import message_from_string
 def get_settings():
     settings = {}
 
+    ## LMTPD config ##
+
+    settings.update({
+        'lmtpd_host': os.environ['LMTPD_HOST'],
+        'lmtpd_port': os.environ['LMTPD_PORT'],
+    })
+    
     ## DB URL ##
 
-    db_url = urlparse.urlparse(os.environ.get('MONGO_URL'))
+    db_url = urlparse.urlparse(os.environ['MONGO_URL'])
     
     # Remove query strings.
     path = db_url.path[1:]
@@ -35,7 +42,7 @@ def get_settings():
         'db_host': db_url.hostname,
         'db_port': db_url.port,
     })
-    
+
     return settings
 
 def valid_utf8(text):
@@ -76,14 +83,13 @@ def parse_parts(msg):
 # Classes ###########################################################
 
 class LMTPServer(SMTPServer):
-    def __init__(self, localaddr, remoteaddr):
-        SMTPServer.__init__(self, localaddr, remoteaddr)
+    def __init__(self, settings):
+        localaddr = (settings['lmtpd_host'], settings['lmtp_port'])
+        SMTPServer.__init__(self, localaddr, None)
 
-        self.db_connect()
+        self.db_connect(settings)
 
-    def db_connect(self):
-        settings = get_settings()
-
+    def db_connect(self, settings):
         self.mongo = Connection('{0}:{1}'.format(settings['db_host'], settings['db_port']))
         self.db = self.mongo[settings['db_name']]
         if settings['db_user'] and settings['db_password']:
@@ -122,7 +128,8 @@ class LMTPChannel(SMTPChannel):
 
 def start():
     with daemon.DaemonContext():
-        LMTPServer(('127.0.0.1', 1111), None)
+        settings = get_settings()
+        LMTPServer(settings)
         asyncore.loop()
 
 if __name__ == '__main__':

@@ -11,10 +11,10 @@ meteor-update:
 	./bin/meteor-update.sh
 
 dev: clean setup
-	./bin/meteor.sh run -p 4000
+	./bin/start.sh
 
 run: clean setup
-	./bin/meteor.sh run -p 4000 --production
+	./bin/start.sh --production
 
 run-lmtpd:
 	./bin/lmtpd.sh
