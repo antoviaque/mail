@@ -7,9 +7,10 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE_DIR="$DIR/.."
 METEOR_DIR="$BASE_DIR/meteor"
 APP_DIR="$BASE_DIR/app"
+LMTPD_DIR="$BASE_DIR/lmtpd"
 
 # Database
-MONGO_URL=mongodb://localhost/mail
+MONGO_URL="mongodb://localhost/mail"
 
 # Local overrides
 touch "$BASE_DIR/local_settings.sh"

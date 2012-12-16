@@ -16,5 +16,5 @@ dev: clean setup
 run: clean setup
 	./bin/meteor.sh run -p 4000 --production
 
-run-lmtp:
-	cd lmtp && ./lmtp.py
+run-lmtpd:
+	./bin/lmtpd.sh

@@ -4,8 +4,9 @@
 
 import asyncore
 import daemon
+import os
+import urlparse
 import uuid
-import time
 
 from pymongo import Connection
 
@@ -15,6 +16,27 @@ from email import message_from_string
 
 
 # Functions #########################################################
+
+def get_settings():
+    settings = {}
+
+    ## DB URL ##
+
+    db_url = urlparse.urlparse(os.environ.get('MONGO_URL'))
+    
+    # Remove query strings.
+    path = db_url.path[1:]
+    path = path.split('?', 2)[0]
+
+    settings.update({
+        'db_name': path,
+        'db_user': db_url.username,
+        'db_password': db_url.password,
+        'db_host': db_url.hostname,
+        'db_port': db_url.port,
+    })
+    
+    return settings
 
 def valid_utf8(text):
     if text is None:
@@ -26,7 +48,7 @@ def parse_parts(msg):
         if msg.get_content_maintype() == 'text':
             content = valid_utf8(msg.get_payload(None, True))
         else:
-            # TODO Save non-text attachments as static files
+            # TODO Save non-text attachments
             content = ''
 
         result = {
@@ -57,8 +79,15 @@ class LMTPServer(SMTPServer):
     def __init__(self, localaddr, remoteaddr):
         SMTPServer.__init__(self, localaddr, remoteaddr)
 
-        self.mongo = Connection()
-        self.db = self.mongo.mail
+        self.db_connect()
+
+    def db_connect(self):
+        settings = get_settings()
+
+        self.mongo = Connection('{0}:{1}'.format(settings.db_host, settings.db_port))
+        self.db = self.mongo[settings.db_name]
+        if settings.db_user and settings.db_password:
+            self.db.authenticate(settings.db_user, settings.db_password)
 
     def process_message(self, peer, mailfrom, rcpttos, data):
         msg = message_from_string(data)
@@ -81,7 +110,7 @@ class LMTPServer(SMTPServer):
 
     def handle_accept(self):
         conn, addr = self.accept()
-        channel = LMTPChannel(self, conn, addr)
+        LMTPChannel(self, conn, addr)
 
 class LMTPChannel(SMTPChannel):
     # LMTP "LHLO" command is routed to the SMTP/ESMTP command
@@ -93,7 +122,7 @@ class LMTPChannel(SMTPChannel):
 
 def start():
     with daemon.DaemonContext():
-        server = LMTPServer(('127.0.0.1', 1111), None)
+        LMTPServer(('127.0.0.1', 1111), None)
         asyncore.loop()
 
 if __name__ == '__main__':
