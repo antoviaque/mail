@@ -25,13 +25,13 @@ Clone the source repository:
 
 ### Dependencies
 
+Install the following packages (Debian-based systems):
+
+    $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server curl python-pip
+
 Install python dependencies:
 
     $ sudo pip install -r requirements
-
-And the following packages (Debian-based systems):
-
-    $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server curl
 
 [Install node.js][]:
 
