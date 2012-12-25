@@ -5,7 +5,6 @@ import uuid
 
 from datetime import datetime
 from email import message_from_string
-from markdown2 import markdown
 from pyzmail import PyzMessage
 
 
@@ -121,7 +120,7 @@ class Mail:
     def body_html(self):
         body_html = self.get_part_content(self.mail_pyzmail.html_part)
         if not body_html and self.body_text:
-            body_html = markdown(self.body_text)
+            body_html = self.body_text.replace('\n', '<br />')
         return body_html
 
     @property
