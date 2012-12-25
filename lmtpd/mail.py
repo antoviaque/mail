@@ -18,6 +18,7 @@ class Mail:
             'body_text',
             'envelope_sender',
             'envelope_to',
+            'excerpt',
             'headers', 
             'message_id',
             'received',
@@ -119,7 +120,7 @@ class Mail:
     @property
     def body_html(self):
         body_html = self.get_part_content(self.mail_pyzmail.html_part)
-        if body_html is None and self.body_text is not None:
+        if not body_html and self.body_text:
             body_html = markdown(self.body_text)
         return body_html
 
@@ -127,15 +128,18 @@ class Mail:
     def body_text(self):
         return self.get_part_content(self.mail_pyzmail.text_part)
 
-
     def get_part_content(self, part):
         if not part:
-            return None
+            return ''
 
         content = part.get_payload()
         if part.charset:
             content = content.decode(part.charset)
         return content
+
+    @property
+    def excerpt(self):
+        return self.body_text[:50]
 
     @property
     def references(self):
