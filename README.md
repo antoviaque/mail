@@ -16,9 +16,20 @@ See also the _Incoming emails_ section below, to feed incoming emails into Mail.
 Installation
 ------------
 
+### Installation
+
+Clone the source repository:
+
+    $ git clone git://github.com/antoviaque/mail.git
+    $ cd mail
+
 ### Dependencies
 
-Install the following packages (Debian-based systems):
+Install python dependencies:
+
+    $ sudo pip install -r requirements
+
+And the following packages (Debian-based systems):
 
     $ sudo apt-get install python-daemon mongodb python-pymongo mongodb-clients mongodb-server curl
 
@@ -35,13 +46,6 @@ Install the following packages (Debian-based systems):
 Install npm:
 
     $ curl http://npmjs.org/install.sh | sudo sh
-
-### Installation
-
-Clone the source repository:
-
-    $ git clone git://github.com/antoviaque/mail.git
-    $ cd mail
 
 ### Configuration (optional)
 

@@ -17,19 +17,10 @@
 //  "AGPLv3".  If not, see <http://www.gnu.org/licenses/>.
 //
 
-// Functions /////////////////////////////////////////////////////////////
-
-function main_loop(loop_fn) {
-    loop_fn();
-    Meteor.setTimeout(main_loop, 1000);
-}
-
 
 // Startup ///////////////////////////////////////////////////////////////
 
 Meteor.startup(function () {
-    main_loop(function() {
-        import_new_mails();
-    });
+
 });
 

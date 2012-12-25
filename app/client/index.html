@@ -80,11 +80,11 @@
       <li><a href="//:0" class="low">Low Priority</a></li>
     </ul>
 
-    <div class="email-excerpt {{selected}}" data="{{_id}}">
+    <div class="email-excerpt {{ selected }}" data="{{ _id }}">
       <a href="//:0">
         <time datetime="2012-08-07T20:45Z">8:45</time>
         <strong>{{ subject }}</strong>
-        <em>{{ from }}</em>
+        <em>{{ sender_str }}</em>
         <span>Incoming email truncated content is formatting free, or should be.</span>
       </a>
     </div>
@@ -128,14 +128,14 @@
     <header class="single-email-header">
       <span class="sender-image" data-avatar="img/avatar.jpg"></span>
       <h3>
-        <cite><a href="//:0">{{ from }}</a></cite> 
-        to <em> {{ to }}</em> <a href="//:0">and three others</a>
+        <cite><a href="//:0">{{ sender_str }}</a></cite> 
+        to <em> {{ recipients_str }}</em>
       </h3>
     </header>
 
     <article class="single-email-content">
       <div class="single-email-content-secure">
-        {{{body_html}}}
+        {{{ body_html }}}
       </div>
     </article>
   </li>

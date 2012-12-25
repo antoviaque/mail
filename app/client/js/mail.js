@@ -64,11 +64,7 @@ Template.conversation_overview.selected = function() {
 // Conversation details //
 
 Template.conversation_details.conversation = function() {
-    var mail = Mails.findOne({_id: Session.get('conversation_current_id')});
-    if(mail) {
-        mail.body_html = mail2html(mail);
-    }
-    return mail;
+    return Mails.findOne({_id: Session.get('conversation_current_id')});
 };
 
 Template.conversation_details.conversation_replying = function() {

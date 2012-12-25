@@ -13,7 +13,7 @@ LMTPD_DIR="$BASE_DIR/lmtpd"
 WEB_PORT="4000"
 
 # Database
-MONGO_URL="mongodb://localhost/mail"
+MONGO_URL="mongodb://localhost:27017/mail"
 
 # LMTPD
 LMTPD_HOST="127.0.0.1"
