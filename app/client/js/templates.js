@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2012 Xavier Antoviaque <xavier@antoviaque.org>
+//  Copyright (C) 2012-2013 Xavier Antoviaque <xavier@antoviaque.org>
 //
 //  This software's license gives you freedom; you can copy, convey,
 //  propagate, redistribute and/or modify this program under the terms of
@@ -16,33 +16,6 @@
 //  along with this program in a file in the toplevel directory called
 //  "AGPLv3".  If not, see <http://www.gnu.org/licenses/>.
 //
-
-// DB Collections ////////////////////////////////////////////////////////
-
-Mails = new Meteor.Collection("mails");
-Meteor.subscribe('mails');
-
-
-// Session variables /////////////////////////////////////////////////////
-
-// Timezone
-Session.set('timezone', jstz.determine_timezone());
-
-// Current conversation
-Session.set('conversation_current_id', null);
-Session.set('conversation_replying', false);
-
-
-// Functions /////////////////////////////////////////////////////////////
-
-function close_reply() {
-    var html_editor = CKEDITOR.instances.html_editor;
-    if(html_editor) {
-        html_editor.destroy();
-    }
-    Session.set('conversation_replying', false);
-}
-
 
 // Templates /////////////////////////////////////////////////////////////
 
@@ -96,60 +69,5 @@ Template.conversation_details.reply_base_html = function() {
         '</blockquote>';
     return reply_base_html;
 };
-
-
-// Events ////////////////////////////////////////////////////////////////
-
-// Wall //
-
-Template.wall.events = {
-    'click .email-excerpt' : function (evt) {
-        var el = $(evt.target);
-        if(!el.hasClass('email-excerpt')) {
-            el = el.closest('.email-excerpt');
-        }
-        close_reply();
-        Session.set('conversation_current_id', el.attr('data'));
-
-        return false;
-    },
-};
-
-// Conversation details //
-
-Template.conversation_details.events = {
-    'click .do-reply': function(evt) {
-        Session.set('conversation_replying', true);
-        return false;
-    },
-    'click .cancel-button': function(evt) {
-        close_reply();
-        return false;
-    },
-    'click .send-button': function(evt) {
-        var orig_mail = Template.conversation_details.conversation();
-        var html_editor = CKEDITOR.instances.html_editor;
-        var reply_html = html_editor.getData();
-
-        var mail = {
-            to : orig_mail.from,
-            from : 'test@maildev.plebia.org',
-            subject : 'Re: ' + orig_mail.subject,
-            html: reply_html,
-        };
-        Meteor.call('sendmail', mail);
-        close_reply();
-        
-        return false;
-    },
-};
-
-
-// Startup ///////////////////////////////////////////////////////////////
-
-Meteor.startup(function() {
-    //$('.dateinput').datepicker();
-});
-
 
 

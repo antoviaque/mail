@@ -59,4 +59,14 @@ var focus_field_by_id = function(id) {
 };
 
 
+// ckeditor /////////////////////////////////////////////////////////
+
+var close_reply = function() {
+    var html_editor = CKEDITOR.instances.html_editor;
+    if(html_editor) {
+        html_editor.destroy();
+    }
+    Session.set('conversation_replying', false);
+};
+
 
