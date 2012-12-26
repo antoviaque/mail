@@ -1,4 +1,8 @@
 .email-thread {
-    max-width: 600px;
+    max-width: 800px;
 }
 
+.single-email-content {
+    font-size: 13px;
+    line-height: 1.3;
+}
